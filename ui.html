@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Store Graphic Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      margin: 24; /* Maintain 24px margin on all sides */
+      background-color: #0c0a17;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch; /* Ensure sections span full width */
+      height: calc(100vh - 48px); /* Account for top and bottom margins */
+      box-sizing: border-box; /* Include padding and margin in width calculation */
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 8px; /* Spacing between title and subtitle */
+      text-align: left;
+    }
+
+    p {
+      font-size: 14px;
+      color: #898793;
+      text-align: left;
+    }
+
+    .header h1,
+    .header p {
+      margin: 0; /* Reset default margins */
+    }
+
+    .header h1 {
+      margin-bottom: 8px; /* Add 8px spacing below the header */
+    }
+
+    .header {
+      margin-bottom: 24px;
+    }
+
+    .option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #181426;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      box-sizing: border-box;
+    }
+
+    .option:hover {
+      background-color: #252134;
+    }
+
+    .option label {
+      font-size: 16px;
+      font-weight: 100;
+    }
+
+    .option input[type="radio"] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #BA81FF;
+      border-radius: 50%;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      transition: border-color 0.3s, background-color 0.3s;
+    }
+
+    .option input[type="radio"]:checked {
+      background-color: #ffffff;
+      border: 2px solid #BA81FF;
+    }
+
+    .option input[type="radio"]:checked::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background-color: #711ED6;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    button {
+      background-color: #711ED6;
+      color: #ffffff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 100;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: background-color 0.3s;
+      width: 100%; /* Ensure button spans full width */
+      box-sizing: border-box;
+    }
+
+    button:hover {
+      background-color: #5d2cc2;
+    }
+
+    .footer {
+      margin-top: 16px; /* Match the spacing above */
+      margin-bottom: 16px;
+      text-align: right; /* Right-align the footer text */
+      font-size: 12px;
+      color: #898793;
+    }
+
+    .footer a {
+      color: #BA81FF;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .note {
+      margin-top: 16px;
+      padding: 12px;
+      background-color: #13111D;
+      color: #5B586D;
+      font-size: 12px;
+      line-height: 150%;
+      border-radius: 12px;
+      text-align: left;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Store Graphic Generator</h1>
+    <p>Kindly select the store you are publishing on.</p>
+  </div>
+  
+  <form id="store-form">
+    <div class="option">
+      <label for="play-store">Play Store</label>
+      <input type="radio" name="store" id="play-store" value="play" required>
+    </div>
+    <div class="option">
+      <label for="app-store">App Store</label>
+      <input type="radio" name="store" id="app-store" value="app">
+    </div>
+    <div class="option">
+      <label for="both">Both</label>
+      <input type="radio" name="store" id="both" value="both">
+    </div>
+    <button type="submit">Create Artboards</button>
+  </form>
+
+  <div class="footer">
+    Built by <a href="#">Gideon Adeyemi</a>
+  </div>
+
+  <div class="note">
+    All artboards created are in compliance with Google Play Store and Apple App Store requirements.
+  </div>
+
+  <script>
+    document.getElementById('store-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const selectedOption = document.querySelector('input[name="store"]:checked').value;
+      parent.postMessage({ pluginMessage: { type: 'generate', store: selectedOption } }, '*');
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Store Graphic Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+      background-color: #0c0a17;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 8px; /* Spacing between title and subtitle */
+    }
+
+    p {
+      font-size: 14px;
+      color: #a3a3a3;
+      margin-bottom: 24px;
+    }
+
+    .header h1,
+    .header p {
+      margin: 0; /* Reset default margins */
+    }
+
+    .header h1 {
+      margin-bottom: 8px; /* Add 8px spacing below the header */
+    }
+
+    .option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #181426;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      width: 100%;
+      max-width: 300px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .option:hover {
+      background-color: #252134;
+    }
+
+    .option label {
+      font-size: 16px;
+    }
+
+    .option input[type="radio"] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #BA81FF;
+      border-radius: 50%;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      transition: border-color 0.3s, background-color 0.3s;
+    }
+
+    .option input[type="radio"]:checked {
+      background-color: #ffffff;
+      border: 2px solid #BA81FF;
+    }
+
+    .option input[type="radio"]:checked::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background-color: #711ED6;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    button {
+      background-color: #7e3ff2;
+      color: #ffffff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 300px;
+      margin-top: 16px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #5d2cc2;
+    }
+
+    .footer {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #a3a3a3;
+    }
+
+    .footer a {
+      color: #7e3ff2;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .note {
+      margin-top: 16px;
+      padding: 12px;
+      background-color: #181426;
+      color: #a3a3a3;
+      font-size: 12px;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Store Graphic Generator</h1>
+    <p>Kindly select the store you are publishing on.</p>
+  </div>
+  
+  <form id="store-form">
+    <div class="option">
+      <label for="play-store">Play Store</label>
+      <input type="radio" name="store" id="play-store" value="play" required>
+    </div>
+    <div class="option">
+      <label for="app-store">App Store</label>
+      <input type="radio" name="store" id="app-store" value="app">
+    </div>
+    <div class="option">
+      <label for="both">Both</label>
+      <input type="radio" name="store" id="both" value="both">
+    </div>
+    <button type="submit">Create Artboards</button>
+  </form>
+
+  <div class="footer">
+    Built by <a href="#">Gideon Adeyemi</a>
+  </div>
+
+  <div class="note">
+    All artboards created are in compliance with Google Play Store and Apple App Store requirements.
+  </div>
+
+  <script>
+    document.getElementById('store-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const selectedOption = document.querySelector('input[name="store"]:checked').value;
+      parent.postMessage({ pluginMessage: { type: 'generate', store: selectedOption } }, '*');
+    });
+  </script>
+</body>
+</html> -->
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Store graphic generator</title>
+</head>
+<body>
+  <h2>Store graphic generator</h2>
+
+  <form id="store-form">
+    <label>
+      <input type="radio" name="store" value="play" required>
+      Play Store
+    </label><br>
+    <label>
+      <input type="radio" name="store" value="app">
+      App Store
+    </label><br>
+    <label>
+      <input type="radio" name="store" value="both">
+      Both
+    </label><br>
+    <button type="submit" id="generate-button">Generate</button>
+  </form>
+
+  <script>
+    // Listen for the form submission
+    document.getElementById('store-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const selectedOption = document.querySelector('input[name="store"]:checked').value;
+      parent.postMessage({ pluginMessage: { type: 'generate', store: selectedOption } }, '*');
+    });
+  </script>
+</body>
+</html> -->
